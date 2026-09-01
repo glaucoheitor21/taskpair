@@ -94,7 +94,7 @@ Seis telas do fluxo principal, desenhadas sobre os tokens de `src/theme` — mes
 | <img src="docs/assets/telas/kanban.png" width="240"> | <img src="docs/assets/telas/equilibrio.png" width="240"> | <img src="docs/assets/telas/tarefa.png" width="240"> |
 | Uma coluna por vez, com a próxima espiando. Tarefas sem responsável trazem "Pegar esta tarefa". | O diferencial: barra empilhada, Balance Score e o convite a redistribuir. | Peso obrigatório na criação — é o que alimenta todo o cálculo. |
 
-As telas também estão em um [canvas editável](https://claude.ai/code/artifact/e30b385f-c022-4934-b920-0d5ad8efa2cc), com exportação em PNG e PDF *(acesso restrito aos autores)*.
+Os arquivos em alta resolução estão em [`docs/assets/telas/`](docs/assets/telas) e a especificação completa da marca em [`docs/02-marca.md`](docs/02-marca.md).
 
 ---
 
