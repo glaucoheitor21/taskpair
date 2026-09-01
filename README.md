@@ -76,7 +76,25 @@ O símbolo é um check formado por **dois traços de cores diferentes que se enc
 
 Tokens completos em [`src/theme/`](src/theme). Todos os valores de contraste foram medidos pela fórmula da WCAG 2.1, não estimados a olho.
 
-🖼️ **[Telas conceituais e brandbook](https://claude.ai/code/artifact/e30b385f-c022-4934-b920-0d5ad8efa2cc)** — artboard de marca (logo, paleta, tipografia) e seis telas: Acesso, Home, Projetos, Kanban, Painel de Equilíbrio e Detalhe da tarefa. Exportável em PNG e PDF.
+<img src="docs/assets/telas/main.png" alt="Brandbook do TaskPair: logo, paleta e tipografia" width="820">
+
+---
+
+## Telas conceituais
+
+Seis telas do fluxo principal, desenhadas sobre os tokens de `src/theme` — mesmas cores, mesma escala tipográfica, mesmos raios que o app vai usar no CP5.
+
+| Acesso | Home | Projetos |
+|:--:|:--:|:--:|
+| <img src="docs/assets/telas/login.png" width="240"> | <img src="docs/assets/telas/home.png" width="240"> | <img src="docs/assets/telas/projetos.png" width="240"> |
+| Entrada por e-mail ou por link de convite — o integrante vê o quadro antes de criar conta. | Próximos prazos, carga individual e o alerta de concentração. | Progresso por peso e o Balance Score de cada projeto. |
+
+| Kanban | Painel de Equilíbrio | Detalhe da tarefa |
+|:--:|:--:|:--:|
+| <img src="docs/assets/telas/kanban.png" width="240"> | <img src="docs/assets/telas/equilibrio.png" width="240"> | <img src="docs/assets/telas/tarefa.png" width="240"> |
+| Uma coluna por vez, com a próxima espiando. Tarefas sem responsável trazem "Pegar esta tarefa". | O diferencial: barra empilhada, Balance Score e o convite a redistribuir. | Peso obrigatório na criação — é o que alimenta todo o cálculo. |
+
+As telas também estão em um [canvas editável](https://claude.ai/code/artifact/e30b385f-c022-4934-b920-0d5ad8efa2cc), com exportação em PNG e PDF *(acesso restrito aos autores)*.
 
 ---
 
@@ -119,7 +137,7 @@ export const USE_MOCKS = false;  // CP6 — API REST
 **Pré-requisitos:** Node.js 18+, npm e o app [Expo Go](https://expo.dev/go) no celular.
 
 ```bash
-git clone https://github.com/<usuario>/taskpair.git
+git clone https://github.com/glaucoheitor21/taskpair.git
 cd taskpair
 npm install
 npx expo start
