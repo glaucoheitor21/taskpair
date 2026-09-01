@@ -76,7 +76,7 @@ O símbolo é um check formado por **dois traços de cores diferentes que se enc
 
 Tokens completos em [`src/theme/`](src/theme). Todos os valores de contraste foram medidos pela fórmula da WCAG 2.1, não estimados a olho.
 
-🖼️ **Telas conceituais:** *link do canvas de design — adicionar aqui*
+🖼️ **[Telas conceituais e brandbook](https://claude.ai/code/artifact/e30b385f-c022-4934-b920-0d5ad8efa2cc)** — artboard de marca (logo, paleta, tipografia) e seis telas: Acesso, Home, Projetos, Kanban, Painel de Equilíbrio e Detalhe da tarefa. Exportável em PNG e PDF.
 
 ---
 
