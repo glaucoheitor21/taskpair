@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="TaskPair">
+  <title>TaskPair — símbolo</title>
+  <desc>Um check formado por dois traços de cores diferentes que se encontram: cada traço é um integrante do grupo, e o check só existe quando os dois aparecem.</desc>
+  <rect width="512" height="512" rx="120" fill="#5B3CF0"/>
+  <!-- traço A — "o outro" -->
+  <path d="M134 252 L234 352" fill="none" stroke="#4FE0C6" stroke-width="46" stroke-linecap="round"/>
+  <!-- traço B — "eu" -->
+  <path d="M234 352 L378 180" fill="none" stroke="#FFFFFF" stroke-width="46" stroke-linecap="round"/>
+</svg>
