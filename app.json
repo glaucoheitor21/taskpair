@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "TaskPair",
+    "slug": "taskpair",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "taskpair",
+    "userInterfaceStyle": "automatic",
+    "icon": "./src/assets/images/icon.png",
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#5B3CF0"
+    },
+    "android": {
+      "package": "br.com.fiap.taskpair",
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "backgroundColor": "#5B3CF0"
+      }
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "br.com.fiap.taskpair"
+    },
+    "plugins": ["expo-font"]
+  }
+}
