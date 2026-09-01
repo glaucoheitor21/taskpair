@@ -1,0 +1,12 @@
+[
+  { "id": "t1", "projectId": "p1", "title": "Documento de escopo", "status": "done", "weight": 3, "assigneeId": "u1", "dueDate": "2026-09-01", "createdAt": "2026-08-20", "completedAt": "2026-08-29" },
+  { "id": "t2", "projectId": "p1", "title": "Identidade visual e logo", "status": "done", "weight": 5, "assigneeId": "u2", "dueDate": "2026-09-01", "createdAt": "2026-08-20", "completedAt": "2026-08-31" },
+  { "id": "t3", "projectId": "p1", "title": "Prototipo navegavel no Figma", "status": "doing", "weight": 8, "assigneeId": "u2", "dueDate": "2026-09-20", "createdAt": "2026-08-22", "completedAt": null },
+  { "id": "t4", "projectId": "p1", "title": "Setup do projeto Expo", "status": "review", "weight": 2, "assigneeId": "u1", "dueDate": "2026-09-05", "createdAt": "2026-08-22", "completedAt": null },
+  { "id": "t5", "projectId": "p1", "title": "Telas com dados mockados", "status": "todo", "weight": 8, "assigneeId": null, "dueDate": "2026-10-15", "createdAt": "2026-08-25", "completedAt": null },
+  { "id": "t6", "projectId": "p1", "title": "Integracao com API REST", "status": "todo", "weight": 8, "assigneeId": null, "dueDate": "2026-11-10", "createdAt": "2026-08-25", "completedAt": null },
+  { "id": "t7", "projectId": "p2", "title": "Levantar estudo de caso", "status": "done", "weight": 3, "assigneeId": "u3", "dueDate": "2026-08-25", "createdAt": "2026-08-11", "completedAt": "2026-08-24" },
+  { "id": "t8", "projectId": "p2", "title": "Montar slides", "status": "doing", "weight": 5, "assigneeId": "u3", "dueDate": "2026-09-22", "createdAt": "2026-08-12", "completedAt": null },
+  { "id": "t9", "projectId": "p2", "title": "Revisar referencias ABNT", "status": "todo", "weight": 2, "assigneeId": "u1", "dueDate": "2026-09-25", "createdAt": "2026-08-12", "completedAt": null },
+  { "id": "t10", "projectId": "p2", "title": "Ensaiar apresentacao", "status": "todo", "weight": 1, "assigneeId": "u4", "dueDate": "2026-09-29", "createdAt": "2026-08-14", "completedAt": null }
+]

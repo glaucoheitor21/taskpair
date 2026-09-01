@@ -1,0 +1,6 @@
+[
+  { "id": "u1", "name": "Glauco Heitor", "email": "glauco@fiap.com.br", "initials": "GH", "color": "#5B3CF0" },
+  { "id": "u2", "name": "Pedro Henrique", "email": "pedro@fiap.com.br", "initials": "PH", "color": "#14C4A9" },
+  { "id": "u3", "name": "Marina Alves", "email": "marina@fiap.com.br", "initials": "MA", "color": "#F5A524" },
+  { "id": "u4", "name": "Rafael Lima", "email": "rafael@fiap.com.br", "initials": "RL", "color": "#F04E5B" }
+]
