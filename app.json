@@ -2,27 +2,42 @@
   "expo": {
     "name": "TaskPair",
     "slug": "taskpair",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "taskpair",
     "userInterfaceStyle": "automatic",
     "icon": "./src/assets/images/icon.png",
-    "splash": {
-      "image": "./src/assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#5B3CF0"
-    },
     "android": {
       "package": "br.com.fiap.taskpair",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#5B3CF0"
-      }
+      },
+      "predictiveBackGestureEnabled": false
     },
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "br.com.fiap.taskpair"
     },
-    "plugins": ["expo-font"]
+    "web": {
+      "favicon": "./src/assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./src/assets/images/splash-icon.png",
+          "imageWidth": 160,
+          "backgroundColor": "#5B3CF0",
+          "dark": {
+            "image": "./src/assets/images/splash-icon.png",
+            "backgroundColor": "#0E0E18"
+          }
+        }
+      ],
+      "expo-asset"
+    ]
   }
 }
