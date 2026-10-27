@@ -1,8 +1,18 @@
-/** AuthNavigator — estrutura definida em navigation/README.md. Implementacao no CP5. */
-import type { FC } from 'react';
+/** AuthNavigator — pilha de autenticação (usuário sem sessão). */
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import type { AuthStackParamList } from './types';
+import { SignInScreen } from '../screens/auth/SignInScreen';
+import { SignUpScreen } from '../screens/auth/SignUpScreen';
 
-export const AuthNavigator: FC = () => {
-  throw new Error('AuthNavigator sera implementado no CP5');
-};
+const Stack = createNativeStackNavigator<AuthStackParamList>();
+
+export function AuthNavigator() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+    </Stack.Navigator>
+  );
+}
 
 export default AuthNavigator;

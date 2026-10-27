@@ -92,4 +92,4 @@ export const statusColor = {
   done: palette.mint500,
 } as const;
 
-export type ThemeColors = typeof lightTheme;
+export type ThemeColors = { [K in keyof typeof lightTheme]: string };

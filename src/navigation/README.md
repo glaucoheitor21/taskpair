@@ -1,24 +1,25 @@
 # Navegação
 
 ```
-RootNavigator
-├── AuthNavigator (usuário não autenticado)
+RootNavigator (native-stack)
+├── Auth → AuthNavigator          usuário sem sessão
 │   ├── SignIn
 │   └── SignUp
-└── AppTabs (usuário autenticado)
-    ├── Home       — próximos prazos, pendências, minha carga
-    ├── Projects   — ProjectsStack
-    │   ├── ProjectList
-    │   ├── ProjectDetail  (Painel de Equilíbrio)
-    │   ├── Kanban
-    │   ├── NewProject
-    │   ├── TaskDetail
-    │   └── NewTask
-    └── Profile    — dados do usuário e histórico de contribuição
+└── (com sessão)
+    ├── App → AppTabs (bottom-tabs)
+    │   ├── Home       — minha carga, alertas, próximos prazos
+    │   ├── Projects   — lista de projetos
+    │   └── Profile    — contribuição, aparência, sair
+    ├── ProjectDetail  — Painel de Equilíbrio, integrantes, convite
+    ├── Kanban         — quadro com quatro colunas
+    ├── TaskDetail     — editar / mover / excluir tarefa
+    ├── NewProject     (modal)
+    └── NewTask        (modal)
 ```
 
-A troca entre `Auth` e `App` é feita pelo `AuthContext`: enquanto não há
+A troca entre `Auth` e o app é feita pelo `AuthContext`: enquanto não há
 sessão, o `RootNavigator` monta apenas a pilha de autenticação.
 
-Biblioteca prevista: `@react-navigation/native` com `native-stack` e
-`bottom-tabs`. Implementação no CP5.
+As telas de detalhe ficam na pilha raiz (e não dentro da aba Projetos) para
+que a Home também possa abri-las e o "voltar" retorne à origem. Detalhes em
+[`docs/06-telas-e-fluxos.md`](../../docs/06-telas-e-fluxos.md).
