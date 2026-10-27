@@ -19,66 +19,58 @@ Além do exigido, já entram nesta etapa o **modelo de domínio tipado** (`src/t
 
 ---
 
-## CP5 — Protótipo funcional com dados mockados
+## CP5 — Protótipo funcional ✅
 
-**Objetivo:** o app navega inteiro e mostra dados reais vindos de `src/mocks`, sem rede.
+**Objetivo:** o app navega inteiro, com dados mockados, banco integrado e testes.
 
-### Etapa 1 — Fundação
-- [ ] `npx create-expo-app` sobre a estrutura existente e `npm install`
-- [ ] Carregar Sora e Inter com `expo-font`
-- [ ] Alias de import funcionando (`babel-plugin-module-resolver`)
-- [ ] `RootNavigator`, `AuthNavigator`, `AppTabs`, `ProjectsStack`
-- [ ] Componentes de base: `Screen`, `Header`, `Button`, `Input`, `Avatar`, `Badge`
+| Entregável | Onde está |
+|---|---|
+| Protótipo funcional com dados mockados | `src/mocks/*.json` → modo local persistido em AsyncStorage |
+| Integração de banco de dados (Supabase) | [`docs/09-supabase.md`](09-supabase.md) · [`supabase/schema.sql`](../supabase/schema.sql) · `src/services/` |
+| Ambiente de teste (Jest) + roteiro manual | [`docs/07-testes.md`](07-testes.md) · `__tests__/` |
+| Telas e fluxos de navegação documentados | [`docs/06-telas-e-fluxos.md`](06-telas-e-fluxos.md) |
+| Decisões técnicas (bibliotecas, arquitetura) | [`docs/04-arquitetura.md`](04-arquitetura.md) |
+| Simulação no Android Studio (emulador) | Capturas em [`docs/assets/app/`](assets/app) |
 
-### Etapa 2 — Leitura
-- [ ] `projectService` e `taskService` lendo de `src/mocks`
-- [ ] `ProjectListScreen` com `ProjectCard` e progresso ponderado
-- [ ] `ProjectDetailScreen` com `MemberList`
-- [ ] `KanbanScreen` com as quatro colunas e `TaskCard`
-- [ ] `HomeScreen` com próximos prazos e carga individual
+- [x] Setup do Expo SDK 58 sobre a estrutura do CP4, fontes Sora e Inter
+- [x] `RootNavigator`, `AuthNavigator`, `AppTabs` com rotas tipadas
+- [x] Componentes de base: `Screen`, `Header`, `Button`, `Input`, `Avatar`, `Badge`, `Card`, `ChipGroup`, `DateField`
+- [x] Leitura: lista de projetos, detalhe, Kanban, Home com prazos e carga individual
+- [x] Escrita: novo projeto, nova tarefa com peso obrigatório, mover entre colunas, editar, excluir
+- [x] **`BalancePanel`** com Balance Score, barra empilhada e alerta de concentração
+- [x] `ProfileScreen` com histórico de contribuição
+- [x] Estados vazio, carregando e erro em todas as listas
+- [x] Acessibilidade: contraste verificado, alvos ≥ 44 dp, `accessibilityLabel`/`Role` nos controles
+- [x] `npm run typecheck` e `npm test` sem erros
 
-### Etapa 3 — Escrita e o diferencial
-- [ ] `NewProjectScreen` e `NewTaskScreen` com validação
-- [ ] Mover tarefa entre colunas (estado em memória)
-- [ ] **`BalancePanel`** consumindo `calculateBalance` — barra empilhada, Balance Score e alerta de concentração
-- [ ] `ProfileScreen` com histórico de contribuição
-- [ ] Estados vazios e de carregamento em todas as listas
-
-### Etapa 4 — Acabamento
-- [ ] Revisão de acessibilidade: contraste, alvos de 44 dp, `accessibilityLabel`
-- [ ] `npm run typecheck` e `npm run lint` sem erros
-- [ ] Protótipo navegável no Figma alinhado às telas implementadas
-- [ ] README atualizado com capturas de tela
-
-**Risco principal:** implementar o Kanban com gesto de arrastar antes das telas de leitura estarem prontas. Mitigação: no CP5 mover tarefa pode ser um seletor de status; o arrastar entra depois, se sobrar tempo.
+Decisão de risco do CP4 mantida: mover tarefa é um botão "→ próxima coluna" + seletor de coluna no detalhe, não arrastar.
 
 ---
 
-## CP6 — App final e APK instalável
+## CP6 — App final e APK ✅
 
-**Objetivo:** o mesmo app, com backend real, entregue como APK.
+| Entregável | Onde está |
+|---|---|
+| App final com as funcionalidades principais | `src/` |
+| README final, manual de uso, decisões técnicas | [`README.md`](../README.md) · [`docs/08-manual-de-uso.md`](08-manual-de-uso.md) · [`docs/04-arquitetura.md`](04-arquitetura.md) |
+| APK instalável | [Releases](https://github.com/glaucoheitor21/taskpair/releases) · `scripts/build-apk.sh` |
 
-### Backend
-- [ ] API REST conforme o contrato em [`docs/04-arquitetura.md`](04-arquitetura.md#5-contrato-da-api-cp6)
-- [ ] Banco de dados com as entidades `User`, `Project`, `Member`, `Task`
-- [ ] Autenticação com token e hash de senha
-- [ ] `GET /projects/:id/balance` reaproveitando a lógica de `workload.ts`
-- [ ] Deploy em ambiente acessível pelo dispositivo
+- [x] Backend: Supabase com `profiles`, `projects`, `members`, `tasks`
+- [x] Autenticação com e-mail/senha (Supabase Auth) e sessão persistida
+- [x] Segurança por linha (RLS): cada pessoa só vê os projetos de que participa
+- [x] Convite de integrante por e-mail; remover integrante devolve as tarefas ao pool
+- [x] Tratamento de erro de rede com "tentar de novo"
+- [x] Modo escuro (RF14), com preferência salva
+- [x] Projeto de exemplo para contas novas
+- [x] APK release gerado e testado no emulador Android
 
-### Integração
-- [ ] `USE_MOCKS = false` e cliente HTTP implementado
-- [ ] Sessão persistida em `AsyncStorage`
-- [ ] Tratamento de erro de rede e estado offline
-- [ ] Convite por link com deep link
+### Fica para depois
+
+- [ ] Convite por link com deep link (hoje é por e-mail)
 - [ ] Notificação local de prazo (D-3 e D-1)
-
-### Entrega
-- [ ] `eas build -p android --profile preview` gerando o APK
-- [ ] Teste em dispositivo físico Android
-- [ ] README com link do APK e instruções de instalação
-- [ ] Apresentação final
-
-**Se sobrar tempo:** exportar relatório de contribuição em PDF (RF13) e modo escuro (RF14) — os tokens de `darkTheme` já existem.
+- [ ] Arrastar cartões entre colunas
+- [ ] Exportar relatório de contribuição em PDF (RF13)
+- [ ] Sincronização em tempo real (Supabase Realtime) — hoje atualiza ao puxar a tela
 
 ---
 
@@ -87,5 +79,5 @@ Além do exigido, já entram nesta etapa o **modelo de domínio tipado** (`src/t
 | Período | Foco |
 |---|---|
 | Setembro | CP4 entregue · início do setup do CP5 |
-| Outubro | CP5 — telas e navegação com dados mockados |
-| Novembro | CP6 — API, integração e build do APK |
+| Outubro | CP5 — telas, dados mockados, Supabase e testes |
+| Outubro/Novembro | CP6 — integração final e APK |

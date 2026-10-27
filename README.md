@@ -8,10 +8,13 @@
 
 Aplicativo mobile em React Native que torna visível *quem está fazendo quanto* em um trabalho acadêmico — cedo o bastante para o grupo redistribuir sozinho.
 
-![Status](https://img.shields.io/badge/checkpoint-CP4%20%E2%80%94%20idealiza%C3%A7%C3%A3o-5B3CF0)
-![Plataforma](https://img.shields.io/badge/React%20Native-Expo%20SDK%2052-14C4A9)
-![Linguagem](https://img.shields.io/badge/TypeScript-strict-3178C6)
+![Status](https://img.shields.io/badge/checkpoint-CP6%20%E2%80%94%20entrega%20final-5B3CF0)
+![Plataforma](https://img.shields.io/badge/React%20Native%200.88-Expo%20SDK%2058-14C4A9)
+![Banco](https://img.shields.io/badge/Supabase-PostgreSQL%20%2B%20RLS-3ECF8E)
+![Testes](https://img.shields.io/badge/Jest-35%20testes-C21325)
 ![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-5B6478)
+
+**[⬇️ Baixar o APK](https://github.com/glaucoheitor21/taskpair/releases/latest)** · [Manual de uso](docs/08-manual-de-uso.md) · [Telas e fluxos](docs/06-telas-e-fluxos.md)
 
 </div>
 
@@ -21,10 +24,10 @@ Aplicativo mobile em React Native que torna visível *quem está fazendo quanto*
 
 | Nome | RM | Frente principal |
 |---|---|---|
-| Glauco Heitor Gonçalves e Silva | 555978 | Arquitetura front-end · API e banco (CP6) |
+| Glauco Heitor Gonçalves e Silva | 555978 | Arquitetura front-end · Banco de dados |
 | Pedro Henrique Junqueira | 556278 | UX/UI e identidade visual · Integração e build |
 
-**Disciplina:** Mobile Development · **Entrega:** Checkpoints 4, 5 e 6
+**Disciplina:** Mobile Development · **Entregas:** Checkpoints 4, 5 e 6
 
 ---
 
@@ -32,21 +35,97 @@ Aplicativo mobile em React Native que torna visível *quem está fazendo quanto*
 
 Todo estudante já carregou um trabalho em grupo sozinho. Existem dezenas de apps de tarefas, e nenhum deles resolve isso — porque todos mostram **o que falta fazer** e nenhum mostra **quem está fazendo quanto**.
 
-Um quadro com 40 cartões, dos quais 31 têm o mesmo rosto no avatar, não avisa ninguém de nada. A informação está lá; ninguém soma. O desequilíbrio só vira assunto na véspera da entrega, quando já não dá para consertar.
-
 ## A solução
 
-No TaskPair **toda tarefa tem um peso**. Escrever a fundamentação teórica não é o mesmo esforço que formatar as referências, e um app que conta cartões finge que é.
+No TaskPair **toda tarefa tem um peso** (1 · 2 · 3 · 5 · 8). Escrever a fundamentação teórica não é o mesmo esforço que formatar as referências, e um app que conta cartões finge que é.
 
-Com peso, o app responde a pergunta que os outros não respondem — *"quanto do trabalho é meu?"* — em uma barra, na tela inicial, na segunda semana.
+Com peso, o app responde à pergunta que os outros não respondem — *"quanto do trabalho é meu?"* — no **Painel de Equilíbrio**: uma barra com a fatia de cada integrante e um **Balance Score** de 0 a 100. Quando alguém passa de 15 pontos percentuais acima da divisão ideal, o app sugere *"A carga está concentrada. Querem redistribuir?"* — nunca *"fulano está fazendo pouco"*.
 
-### Painel de Equilíbrio
+O cálculo é público e testado: [`src/utils/workload.ts`](src/utils/workload.ts) · [`__tests__/workload.test.ts`](__tests__/workload.test.ts).
 
-Uma barra empilhada com uma faixa por integrante, proporcional ao peso das tarefas atribuídas, e um **Balance Score** de 0 a 100, onde 100 é divisão perfeitamente igual. Quando alguém passa de 15 pontos percentuais acima da divisão ideal, o app sinaliza — e a frase que aparece é *"a carga está concentrada. Querem redistribuir?"*, nunca *"fulano está fazendo pouco"*.
+> **Transparência, não vigilância.** O app mostra só dados que o próprio grupo inseriu. Nenhuma redistribuição é automática — o TaskPair aponta, a conversa é humana.
 
-O cálculo é público e auditável: [`src/utils/workload.ts`](src/utils/workload.ts). Uma métrica que descreve o esforço de pessoas reais precisa poder ser conferida.
+---
 
-> **Transparência, não vigilância.** O app mostra dados que o próprio grupo inseriu. Não rastreia tempo de tela, não monitora atividade, não pontua pessoas, e nenhuma redistribuição é automática — o TaskPair aponta, a conversa é humana.
+## O app
+
+Capturas do APK release rodando no emulador **Pixel 7** do Android Studio.
+
+| Entrar | Início | Projetos |
+|:--:|:--:|:--:|
+| <img src="docs/assets/app/01-entrar.png" width="230"> | <img src="docs/assets/app/02-inicio.png" width="230"> | <img src="docs/assets/app/03-projetos.png" width="230"> |
+| E-mail e senha (Supabase Auth). No modo local, atalho de demonstração. | Minha carga, alerta de concentração e próximos prazos. | Progresso por peso, prazo e Balance Score de cada projeto. |
+
+| Painel de Equilíbrio | Quadro Kanban | Detalhe da tarefa |
+|:--:|:--:|:--:|
+| <img src="docs/assets/app/04b-equilibrio.png" width="230"> | <img src="docs/assets/app/05-quadro.png" width="230"> | <img src="docs/assets/app/06-tarefa.png" width="230"> |
+| Score, barra por integrante, desvio em p.p. e o convite a redistribuir. | Uma coluna por vez; "Pegar esta tarefa" e "→ próxima coluna". | Editar peso, responsável, coluna e prazo. |
+
+| Nova tarefa | Perfil | Modo escuro |
+|:--:|:--:|:--:|
+| <img src="docs/assets/app/07-nova-tarefa.png" width="230"> | <img src="docs/assets/app/08-perfil.png" width="230"> | <img src="docs/assets/app/09-escuro.png" width="230"> |
+| Peso obrigatório com explicação de cada nível. | Contribuição por projeto vs. divisão ideal. | Tokens de tema claro/escuro do CP4. |
+
+### Funcionalidades
+
+- **Conta:** cadastro, login, sessão persistida, sair.
+- **Projetos:** criar, convidar integrante por e-mail, remover integrante (tarefas voltam ao pool), arquivar, excluir.
+- **Tarefas:** criar com peso obrigatório, editar, atribuir, deixar no pool, "pegar", mover entre as colunas *A fazer → Fazendo → Revisão → Concluído*, excluir.
+- **Painel de Equilíbrio:** Balance Score, barra empilhada, carga e desvio por integrante, peso no pool, alerta de concentração (no projeto e na Início).
+- **Início:** minha carga total, alertas, próximos prazos com cor de urgência, contador do pool.
+- **Perfil:** estatísticas, contribuição por projeto, tema sistema/claro/escuro.
+- **Qualidade:** estados de carregando, vazio e erro com "tentar de novo"; validação de formulários; acessibilidade (rótulos, papéis, alvos ≥ 44 dp, contraste WCAG AA).
+
+---
+
+## Como rodar
+
+**Pré-requisitos:** Node.js 20+ e npm. Para celular: app **Expo Go** (SDK 58). Para emulador: Android Studio com um AVD.
+
+```bash
+git clone https://github.com/glaucoheitor21/taskpair.git
+cd taskpair
+npm install
+npx expo start
+```
+
+- **Celular:** leia o QR Code com o Expo Go.
+- **Emulador Android:** com o emulador aberto, aperte `a` no terminal do Expo.
+- **Navegador:** aperte `w`.
+
+### Dados: Supabase ou modo local
+
+| Modo | Quando | Login |
+|---|---|---|
+| **Supabase** | Existe um `.env` com `EXPO_PUBLIC_SUPABASE_URL` e `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Crie sua conta no próprio app |
+| **Local** | Sem `.env` | Toque em *Modo demonstração* ou use `glauco@fiap.com.br` / `123456` |
+
+O modo local copia os dados de [`src/mocks/`](src/mocks) para o aparelho e salva tudo que você alterar. Para configurar o banco, siga [`docs/09-supabase.md`](docs/09-supabase.md) (≈5 minutos: criar projeto, rodar [`supabase/schema.sql`](supabase/schema.sql), colar URL e chave no `.env`).
+
+### Testes
+
+```bash
+npm test             # 35 testes Jest: regra de equilíbrio, serviços, componentes
+npm run typecheck    # TypeScript strict
+```
+
+Detalhes e roteiro de testes manuais em [`docs/07-testes.md`](docs/07-testes.md).
+
+### Gerar o APK
+
+**Local (Windows, Git Bash)** — requer Android SDK, o JDK do Android Studio e *CMake 3.31.6* instalado pelo SDK Manager:
+
+```bash
+npm run build:apk:local
+# → android/app/build/outputs/apk/release/app-release.apk
+```
+
+**Na nuvem (EAS Build)** — requer conta Expo:
+
+```bash
+npx eas-cli login
+npm run build:apk
+```
 
 ---
 
@@ -57,44 +136,13 @@ O cálculo é público e auditável: [`src/utils/workload.ts`](src/utils/workloa
 | 📄 [Escopo](docs/01-escopo.md) | Problema, público-alvo, personas, proposta de valor, requisitos, riscos |
 | 🎨 [Marca e identidade visual](docs/02-marca.md) | Nome, símbolo, paleta com contraste verificado, tipografia, tom de voz |
 | 💡 [Pitch e modelo de negócio](docs/03-pitch-modelo-de-negocio.md) | Monetização, concorrência, TAM/SAM/SOM, aquisição |
-| 🏗️ [Arquitetura](docs/04-arquitetura.md) | Stack, estrutura de pastas, modelo de dados, contrato da API |
-| 🗺️ [Roadmap](docs/05-roadmap.md) | O que já está pronto e o que entra no CP5 e no CP6 |
-
----
-
-## Identidade visual
-
-O símbolo é um check formado por **dois traços de cores diferentes que se encontram**. Cada traço é um integrante do grupo: o check só existe porque os dois aparecem.
-
-| | Violeta | Menta | Tinta |
-|---|---|---|---|
-| **Hex** | `#5B3CF0` | `#14C4A9` | `#12121C` |
-| **Papel** | "eu" — ação individual | "o grupo" — progresso coletivo | Texto |
-| **Contraste sobre branco** | 6,27:1 ✅ AA | preenchimento apenas | 18,60:1 ✅ AAA |
-
-**Tipografia:** [Sora](https://fonts.google.com/specimen/Sora) para títulos e números, [Inter](https://fonts.google.com/specimen/Inter) para interface. Ambas open source e empacotadas no APK.
-
-Tokens completos em [`src/theme/`](src/theme). Todos os valores de contraste foram medidos pela fórmula da WCAG 2.1, não estimados a olho.
-
-<img src="docs/assets/telas/main.png" alt="Brandbook do TaskPair: logo, paleta e tipografia" width="820">
-
----
-
-## Telas conceituais
-
-Seis telas do fluxo principal, desenhadas sobre os tokens de `src/theme` — mesmas cores, mesma escala tipográfica, mesmos raios que o app vai usar no CP5.
-
-| Acesso | Home | Projetos |
-|:--:|:--:|:--:|
-| <img src="docs/assets/telas/login.png" width="240"> | <img src="docs/assets/telas/home.png" width="240"> | <img src="docs/assets/telas/projetos.png" width="240"> |
-| Entrada por e-mail ou por link de convite — o integrante vê o quadro antes de criar conta. | Próximos prazos, carga individual e o alerta de concentração. | Progresso por peso e o Balance Score de cada projeto. |
-
-| Kanban | Painel de Equilíbrio | Detalhe da tarefa |
-|:--:|:--:|:--:|
-| <img src="docs/assets/telas/kanban.png" width="240"> | <img src="docs/assets/telas/equilibrio.png" width="240"> | <img src="docs/assets/telas/tarefa.png" width="240"> |
-| Uma coluna por vez, com a próxima espiando. Tarefas sem responsável trazem "Pegar esta tarefa". | O diferencial: barra empilhada, Balance Score e o convite a redistribuir. | Peso obrigatório na criação — é o que alimenta todo o cálculo. |
-
-Os arquivos em alta resolução estão em [`docs/assets/telas/`](docs/assets/telas) e a especificação completa da marca em [`docs/02-marca.md`](docs/02-marca.md).
+| 🏗️ [Arquitetura e decisões técnicas](docs/04-arquitetura.md) | Stack, bibliotecas, estrutura de pastas, camada de dados, modelo |
+| 🗺️ [Roadmap](docs/05-roadmap.md) | O que foi entregue em cada checkpoint e o que fica para depois |
+| 🧭 [Telas e fluxos](docs/06-telas-e-fluxos.md) | Mapa de navegação, descrição de cada tela, fluxos principais |
+| 🧪 [Testes](docs/07-testes.md) | Jest (35 testes) e roteiro de testes manuais |
+| 📱 [Manual de uso](docs/08-manual-de-uso.md) | Como instalar e usar o app |
+| 🗄️ [Supabase](docs/09-supabase.md) | Modelo do banco, políticas RLS, configuração |
+| 🎤 [Roteiro de apresentação](docs/10-roteiro-apresentacao.md) | Demo de 5 minutos para a banca |
 
 ---
 
@@ -102,56 +150,26 @@ Os arquivos em alta resolução estão em [`docs/assets/telas/`](docs/assets/tel
 
 ```
 taskpair/
-├── docs/            Documentação (escopo, marca, pitch, arquitetura, roadmap)
-├── brand/           Logo em SVG e PNG
-├── .github/         Templates de issue e pull request
-└── src/
-    ├── theme/       ✅ Tokens de cor, tipografia e espaçamento
-    ├── types/       ✅ Modelo de domínio em TypeScript
-    ├── utils/       ✅ Cálculo de equilíbrio, prazos, validações
-    ├── mocks/       ✅ Dados de exemplo para o CP5
-    ├── components/  Common · layout · project · task
-    ├── screens/     Auth · home · projects · tasks · profile
-    ├── navigation/  Stacks e tabs
-    ├── contexts/    AuthContext, ProjectContext
-    ├── hooks/       useAuth, useProjects, useTasks, useBalance
-    ├── services/    Fronteira única com mocks (CP5) e API REST (CP6)
-    └── assets/      Fontes e imagens
+├── App.tsx            Fontes, splash, provedores e navegação
+├── src/
+│   ├── theme/         Tokens de cor (claro/escuro), tipografia, espaçamento
+│   ├── types/         Modelo de domínio em TypeScript
+│   ├── utils/         Cálculo de equilíbrio, datas, validações (regras puras)
+│   ├── mocks/         Dados de demonstração (modo local)
+│   ├── services/      Única fronteira com dados: Supabase ou local
+│   ├── contexts/      AuthContext, ProjectContext
+│   ├── hooks/         useAuth, useProjects, useTasks, useBalance
+│   ├── navigation/    Root (stack), Auth (stack), App (tabs) — rotas tipadas
+│   ├── components/    common · layout · project · task
+│   └── screens/       auth · home · projects · tasks · profile
+├── __tests__/         Testes Jest
+├── supabase/          Esquema SQL do banco + RLS
+├── scripts/           Build local do APK
+├── docs/              Documentação
+└── brand/             Logo em SVG e PNG
 ```
 
-✅ = implementado neste CP4. O restante são contratos declarados, prontos para o CP5.
-
-A regra que sustenta a estrutura: **nenhuma tela faz `fetch` e nenhuma tela importa de `mocks/`.** Tudo passa por `services/`, e a virada do CP5 para o CP6 é uma linha em [`src/services/api.ts`](src/services/api.ts):
-
-```ts
-export const USE_MOCKS = true;   // CP5 — dados mockados
-export const USE_MOCKS = false;  // CP6 — API REST
-```
-
----
-
-## Como rodar
-
-> **Estado atual (CP4):** o repositório contém a documentação, a identidade visual e a estrutura do projeto com os tokens, tipos e regras de negócio implementados. As dependências ainda não foram instaladas — isso é a primeira tarefa do CP5.
-
-**Pré-requisitos:** Node.js 18+, npm e o app [Expo Go](https://expo.dev/go) no celular.
-
-```bash
-git clone https://github.com/glaucoheitor21/taskpair.git
-cd taskpair
-npm install
-npx expo start
-```
-
-Leia o QR Code com o Expo Go (Android) ou com a câmera (iOS).
-
-**Build do APK (CP6):**
-
-```bash
-npm install -g eas-cli
-eas login
-npm run build:apk
-```
+A regra que sustenta a estrutura desde o CP4: **nenhuma tela faz `fetch`, importa de `mocks/` ou fala com o Supabase.** Tudo passa por `services/`, e por isso trocar dados mockados por banco real não exigiu reescrever nenhuma tela.
 
 ---
 
@@ -159,13 +177,15 @@ npm run build:apk
 
 | Camada | Tecnologia |
 |---|---|
-| Runtime | React Native 0.76 · Expo SDK 52 |
+| Runtime | React Native 0.88 · Expo SDK 58 |
 | Linguagem | TypeScript (`strict`) |
 | Navegação | React Navigation 7 — native-stack + bottom-tabs |
 | Estado | Context API + hooks |
+| Banco e autenticação | Supabase (PostgreSQL, Auth, Row Level Security) |
 | Persistência local | AsyncStorage |
-| Fontes | @expo-google-fonts (Sora, Inter) |
-| Build | EAS Build → APK |
+| Fontes e ícones | @expo-google-fonts (Sora, Inter) · Feather |
+| Testes | Jest · jest-expo · Testing Library |
+| Build | Gradle local / EAS Build → APK |
 
 ---
 
@@ -173,19 +193,18 @@ npm run build:apk
 
 | Checkpoint | Etapa | Estado |
 |---|---|---|
-| **CP4** | Idealização — conceito, marca, documentação | ✅ Concluído |
-| **CP5** | Protótipo funcional com dados mockados | 🔜 Outubro |
-| **CP6** | App final integrado à API + APK instalável | 🔜 Novembro |
+| **CP4** | Idealização — conceito, marca, documentação | ✅ |
+| **CP5** | Protótipo funcional — dados mockados, Supabase, testes, emulador | ✅ |
+| **CP6** | App final + APK instalável | ✅ |
 
-Detalhamento em [`docs/05-roadmap.md`](docs/05-roadmap.md).
+Próximos passos (deep link de convite, notificações de prazo, arrastar cartões, relatório em PDF) em [`docs/05-roadmap.md`](docs/05-roadmap.md).
 
 ---
 
 ## Convenções
 
-- Commits seguem [Conventional Commits](https://www.conventionalcommits.org/pt-br/): `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`
-- `main` protegida; trabalho em branches `feat/<assunto>`, integrado por pull request
-- Nenhuma cor, fonte ou espaçamento fora de `src/theme` — isso é item do checklist de PR
+- Commits seguem [Conventional Commits](https://www.conventionalcommits.org/pt-br/): `feat:`, `fix:`, `docs:`, `chore:`, `test:`
+- Nenhuma cor, fonte ou espaçamento fora de `src/theme` — item do checklist de PR
 
 ---
 

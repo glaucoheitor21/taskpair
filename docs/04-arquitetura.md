@@ -8,15 +8,16 @@ Este documento explica **por que** as pastas estão organizadas assim, não só 
 
 | Camada | Escolha | Motivo |
 |---|---|---|
-| Runtime | **React Native 0.76 + Expo SDK 52** | Expo entrega build de APK sem Android Studio configurado, o que é decisivo para uma dupla |
+| Runtime | **React Native 0.88 + Expo SDK 58** | SDK atual: roda no Expo Go da loja e gera APK sem configurar Android Studio à mão. No CP4 o plano era o SDK 52; ao instalar as dependências subimos para o SDK vigente, porque o Expo Go só abre a versão mais recente |
 | Linguagem | **TypeScript** em modo `strict` | O modelo de domínio (peso, status, papéis) é o coração do produto; erro de tipo aqui é erro de regra de negócio |
-| Navegação | **React Navigation 7** (native-stack + bottom-tabs) | Padrão de fato; suporte a deep link, necessário para o convite por link |
-| Estado | **Context API + hooks** | O app tem pouco estado global (sessão, projeto ativo). Redux seria peso morto |
-| Persistência local | **AsyncStorage** | Só sessão e preferência de tema |
-| Fontes | **@expo-google-fonts** (Sora + Inter) | Empacotadas no APK; sem download em runtime |
-| Build | **EAS Build** (`preview` → APK) | Entrega do CP6 |
-
----
+| Navegação | **React Navigation 7** (native-stack + bottom-tabs) | Padrão de fato, telas nativas, rotas tipadas |
+| Estado | **Context API + hooks** (`AuthContext`, `ProjectContext`, `ThemeContext`) | O app tem pouco estado global (sessão, projetos do usuário, tema). Redux seria peso morto |
+| Backend | **Supabase** (PostgreSQL + Auth + RLS) | Banco relacional combina com o modelo (projeto ↔ integrante ↔ tarefa); autenticação e segurança por linha prontas, sem servidor próprio para manter |
+| Persistência local | **AsyncStorage** | Sessão do Supabase, preferência de tema e o banco do modo local |
+| Fontes | **@expo-google-fonts** (Sora + Inter) | Empacotadas no app; sem download em runtime |
+| Ícones | **@expo/vector-icons** (Feather) | Traço fino e uniforme, combina com o símbolo da marca |
+| Testes | **Jest + jest-expo + Testing Library** | Mesmo transformador do Metro; testa regra de negócio, serviços e componentes |
+| Build | **Gradle local** (`scripts/build-apk.sh`) ou **EAS Build** (`preview` → APK) | Os dois caminhos geram o mesmo APK release |
 
 ## 2. Estrutura de pastas
 
@@ -44,11 +45,11 @@ taskpair/
     ├── navigation/          RootNavigator, AuthNavigator, AppTabs, ProjectsStack, types
     ├── contexts/            AuthContext, ProjectContext
     ├── hooks/               useAuth, useProjects, useTasks, useBalance
-    ├── services/            api.ts, storage.ts, *Service.ts — a fronteira com o mundo externo
+    ├── services/            api.ts, supabase.ts, localDb.ts, storage.ts, *Service.ts — a fronteira com o mundo externo
     └── assets/              fonts/, images/
 ```
 
-✅ = já implementado neste CP4. O restante são contratos declarados, com a assinatura e a documentação prontas para o CP5.
+Todas as pastas estão implementadas desde o CP5. Fora de `src/`: `__tests__/` (Jest), `supabase/` (esquema do banco) e `scripts/` (build local do APK).
 
 ---
 
@@ -56,21 +57,25 @@ taskpair/
 
 ### 3.1. `services/` é a única fronteira com o mundo externo
 
-Nenhuma tela faz `fetch` e nenhuma tela importa de `mocks/`. Tudo passa por `services/`.
+Nenhuma tela faz `fetch`, importa de `mocks/` ou fala com o Supabase. Tudo passa por `services/`, e cada função de serviço tem as duas implementações lado a lado:
 
 ```
-Screen → hook → service → ┬ CP5: src/mocks/*.json
-                          └ CP6: API REST (fetch)
+Screen → hook → ProjectContext → service ─┬─ DATA_SOURCE = 'supabase' → @supabase/supabase-js → PostgreSQL (RLS)
+                                          └─ DATA_SOURCE = 'local'    → src/mocks/*.json → AsyncStorage
 ```
 
-A troca é uma linha em `src/services/api.ts`:
+A escolha é automática em [`src/services/api.ts`](../src/services/api.ts): se `EXPO_PUBLIC_SUPABASE_URL` e `EXPO_PUBLIC_SUPABASE_ANON_KEY` existirem no `.env`, o app usa o Supabase; senão, roda no modo local com os dados mockados persistidos no aparelho. Os testes sempre rodam no modo local.
 
-```ts
-export const USE_MOCKS = true;   // CP5
-export const USE_MOCKS = false;  // CP6
-```
+| Serviço | Funções |
+|---|---|
+| `authService` | `getSession`, `signIn`, `signUp`, `signOut` |
+| `projectService` | `listProjects`, `createProject`, `updateProject`, `deleteProject`, `inviteMember`, `removeMember`, `listUsers` |
+| `taskService` | `listTasks`, `createTask`, `updateTask`, `deleteTask` |
+| `demoService` | `createDemoProject` — popula uma conta nova com um projeto de exemplo |
 
-É essa fronteira que torna o CP6 uma tarefa de integração e não uma reescrita.
+Essa fronteira cumpriu o que prometia no CP4: a integração com o banco do CP6 não exigiu mudar nenhuma tela.
+
+**Atualização otimista:** ao mover um cartão de coluna, o `ProjectContext` atualiza a interface na hora e só depois confirma com o serviço; se a gravação falhar, o cartão volta e o usuário vê o erro.
 
 ### 3.2. `utils/workload.ts` é regra de negócio pura, isolada de React
 
@@ -103,35 +108,25 @@ Tipos completos em [`src/types/index.ts`](../src/types/index.ts).
 
 ---
 
-## 5. Contrato da API (CP6)
+## 5. Banco de dados (CP5/CP6)
 
-Declarado em `src/services/api.ts` desde já, para que o backend possa ser desenvolvido em paralelo às telas.
+O contrato REST previsto no CP4 (`/projects`, `/tasks`…) foi substituído pelo **Supabase**, que expõe as mesmas entidades com autenticação e segurança por linha já prontas — sem um servidor próprio para hospedar e manter. As operações são as mesmas do contrato original, agora feitas pelo SDK:
 
-| Método | Rota | Descrição |
-|---|---|---|
-| `POST` | `/auth/sign-up` | Cadastro |
-| `POST` | `/auth/sign-in` | Login, devolve token |
-| `GET` | `/projects` | Projetos do usuário autenticado |
-| `POST` | `/projects` | Criar projeto |
-| `GET` | `/projects/:id` | Detalhe do projeto |
-| `PATCH` | `/projects/:id` | Editar / arquivar |
-| `GET` | `/projects/:id/members` | Integrantes |
-| `POST` | `/projects/:id/members` | Convidar |
-| `GET` | `/projects/:id/balance` | Painel de Equilíbrio |
-| `GET` | `/tasks?projectId=` | Tarefas do projeto |
-| `POST` | `/tasks` | Criar tarefa |
-| `PATCH` | `/tasks/:id` | Editar, mover de coluna, reatribuir |
-| `DELETE` | `/tasks/:id` | Remover |
+| Operação do CP4 | Implementação |
+|---|---|
+| `POST /auth/sign-up` · `/auth/sign-in` | `supabase.auth.signUp` · `signInWithPassword` (perfil criado por trigger) |
+| `GET/POST/PATCH /projects` | `from('projects').select('*, members(*)')` · `insert` · `update` |
+| `POST /projects/:id/members` | busca em `profiles` por e-mail + `insert` em `members` |
+| `GET /projects/:id/balance` | **calculado no app** com `calculateBalance` — derivado, nunca persistido |
+| `GET/POST/PATCH/DELETE /tasks` | `from('tasks')…` |
 
-Autenticação por `Authorization: Bearer <token>`.
-
----
+Tabelas, políticas RLS e passo a passo de configuração: [`docs/09-supabase.md`](09-supabase.md) e [`supabase/schema.sql`](../supabase/schema.sql).
 
 ## 6. Convenções de código
 
 - **Componentes** em `PascalCase.tsx`, um por arquivo, com `export default` e export nomeado.
 - **Hooks** em `useAlgo.ts`; funções puras em `camelCase.ts`.
-- **Imports** por alias (`@theme`, `@components`, `@services`) — declarados em `tsconfig.json` e `babel.config.js`.
+- **Imports relativos.** Os aliases previstos no CP4 (`@theme`, `@components`…) foram retirados: exigiam plugin de Babel extra e configuração duplicada no Jest, sem ganho real num projeto deste tamanho.
 - **Texto de interface** sempre em pt-BR e sempre no componente, nunca no service.
 - **Commits** no padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/): `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`.
 - **Branches**: `main` protegida; trabalho em `feat/<assunto>`, integrado por pull request usando o template do repositório.
