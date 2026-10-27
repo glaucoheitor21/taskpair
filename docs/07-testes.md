@@ -84,3 +84,20 @@ Executado no emulador **Pixel 7 (API 37, x86_64)** do Android Studio com o APK r
 | G2 | Puxar para baixo na Início/Projetos | Indicador de atualização e dados recarregados |
 | G3 | Modo avião com Supabase configurado | Mensagem "Sem conexão com o servidor" e botão *Tentar de novo* |
 | G4 | TalkBack ligado | Botões, abas e cartões anunciam rótulo e estado |
+
+---
+
+## 3. Teste de integração com o Supabase
+
+Executado em 27/10/2026 com o APK `TaskPair-v1.0.0.apk` (Supabase) no emulador Pixel 7, usando duas contas de teste (A criada pela tela de cadastro do app, B criada pela API de Auth). As verificações de banco foram feitas pela API REST do Supabase com o token de cada conta.
+
+| # | Passo | Resultado |
+|---|---|---|
+| S1 | Tabelas `profiles`, `projects`, `members`, `tasks` respondem na API | ✅ HTTP 200 |
+| S2 | *Confirm email* desligado (`mailer_autoconfirm`) | ✅ |
+| S3 | Conta A: *Criar conta* no app | ✅ Entrou direto na Início; perfil criado pelo trigger |
+| S4 | Conta A: *Gerar projeto de exemplo* | ✅ Projeto + integrante *owner* + 6 tarefas gravados (RLS de escrita ok) |
+| S5 | Conta A: convidar `B` por e-mail | ✅ "Pedro Teste agora faz parte do projeto"; Painel passou a 0/100 com alerta |
+| S6 | Conta B (API): listar projetos e tarefas | ✅ Vê o projeto e as 6 tarefas só depois do convite |
+| S7 | Sem login (só a chave *anon*): listar projetos | ✅ Lista vazia — RLS bloqueia |
+| S8 | Conta A: reatribuir "Formatar referências" para B no detalhe da tarefa | ✅ Banco mostra a tarefa atribuída a B |

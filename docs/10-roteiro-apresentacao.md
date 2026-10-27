@@ -2,6 +2,8 @@
 
 Para a demonstração do CP5/CP6. Use o APK instalado no celular ou no emulador.
 
+**Antes da aula:** instale o `TaskPair-v1.0.0.apk` (Supabase) nos dois celulares, crie a conta de cada um, crie o projeto, convide o colega e cadastre umas 6 tarefas com pesos desiguais — assim o alerta de concentração já aparece na demo. Deixe também o `-offline-demo.apk` à mão.
+
 | Tempo | O que mostrar | O que falar |
 |---|---|---|
 | 0:00 | Ícone e splash | "TaskPair: trabalhos em grupo sem trabalho desigual. No CP4 apresentamos a ideia; hoje é o app funcionando." |
@@ -16,4 +18,4 @@ Para a demonstração do CP5/CP6. Use o APK instalado no celular ou no emulador.
 
 **Se perguntarem do modelo de negócio:** freemium — ver [`docs/03-pitch-modelo-de-negocio.md`](03-pitch-modelo-de-negocio.md).
 
-**Plano B sem internet:** o APK sem `.env` roda no modo local, com os dados de demonstração no próprio aparelho.
+**Plano B sem internet:** o `TaskPair-v1.0.0-offline-demo.apk` roda no modo local, com os dados de demonstração no próprio aparelho — toque em *Modo demonstração* na tela de entrada.

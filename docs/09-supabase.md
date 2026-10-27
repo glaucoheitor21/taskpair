@@ -4,6 +4,8 @@ O TaskPair usa o [Supabase](https://supabase.com) (PostgreSQL gerenciado + auten
 
 ---
 
+> **Estado:** o projeto Supabase do grupo está configurado e o APK `TaskPair-v1.0.0.apk` aponta para ele. Testado em 27/10/2026 no emulador: cadastro pelo app, projeto de exemplo, convite por e-mail, reatribuição de tarefa e isolamento por RLS (ver [`docs/07-testes.md`](07-testes.md#3-teste-de-integração-com-o-supabase)).
+
 ## 1. Modelo
 
 ```mermaid

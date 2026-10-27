@@ -100,6 +100,13 @@ npx expo start
 | **Supabase** | Existe um `.env` com `EXPO_PUBLIC_SUPABASE_URL` e `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Crie sua conta no próprio app |
 | **Local** | Sem `.env` | Toque em *Modo demonstração* ou use `glauco@fiap.com.br` / `123456` |
 
+Na [página de Releases](https://github.com/glaucoheitor21/taskpair/releases/latest) há dois APKs:
+
+| Arquivo | Dados | Para quê |
+|---|---|---|
+| `TaskPair-v1.0.0.apk` | **Supabase do grupo** (nuvem) | Uso real: crie sua conta e convide o grupo |
+| `TaskPair-v1.0.0-offline-demo.apk` | Local, com dados de demonstração | Apresentar sem internet; entra com um toque em *Modo demonstração* |
+
 O modo local copia os dados de [`src/mocks/`](src/mocks) para o aparelho e salva tudo que você alterar. Para configurar o banco, siga [`docs/09-supabase.md`](docs/09-supabase.md) (≈5 minutos: criar projeto, rodar [`supabase/schema.sql`](supabase/schema.sql), colar URL e chave no `.env`).
 
 ### Testes

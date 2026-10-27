@@ -6,7 +6,10 @@ Guia rápido para quem vai usar o app no trabalho em grupo.
 
 ## Instalar
 
-**Android (APK):** baixe o `TaskPair-v1.0.0.apk` na página de [Releases](https://github.com/glaucoheitor21/taskpair/releases) do repositório, abra o arquivo no celular e permita *instalar apps desta fonte* quando o Android pedir. O app aparece com o ícone violeta do check.
+**Android (APK):** baixe na página de [Releases](https://github.com/glaucoheitor21/taskpair/releases) do repositório, abra o arquivo no celular e permita *instalar apps desta fonte* quando o Android pedir. O app aparece com o ícone violeta do check.
+
+- `TaskPair-v1.0.0.apk` — versão conectada ao banco (Supabase). Precisa de internet; cada pessoa cria a própria conta.
+- `TaskPair-v1.0.0-offline-demo.apk` — versão de demonstração, funciona sem internet com dados de exemplo.
 
 **Expo Go (desenvolvimento):** veja *Como rodar* no [README](../README.md#como-rodar).
 
@@ -14,7 +17,7 @@ Guia rápido para quem vai usar o app no trabalho em grupo.
 
 - **Tem conta?** Digite e-mail e senha e toque **Entrar**.
 - **Primeira vez?** Toque **Criar conta**, informe nome, e-mail e uma senha de pelo menos 6 caracteres.
-- **Só quer conhecer?** Na versão de demonstração (dados locais), toque no cartão **Modo demonstração** — você entra como *Glauco* com três projetos de exemplo.
+- **Só quer conhecer?** No APK *offline-demo*, toque no cartão **Modo demonstração** — você entra como *Glauco* com três projetos de exemplo.
 
 A sessão fica salva: da próxima vez o app abre direto na tela inicial.
 
