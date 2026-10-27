@@ -1,12 +1,27 @@
 [
-  { "id": "t1", "projectId": "p1", "title": "Documento de escopo", "status": "done", "weight": 3, "assigneeId": "u1", "dueDate": "2026-09-01", "createdAt": "2026-08-20", "completedAt": "2026-08-29" },
-  { "id": "t2", "projectId": "p1", "title": "Identidade visual e logo", "status": "done", "weight": 5, "assigneeId": "u2", "dueDate": "2026-09-01", "createdAt": "2026-08-20", "completedAt": "2026-08-31" },
-  { "id": "t3", "projectId": "p1", "title": "Prototipo navegavel no Figma", "status": "doing", "weight": 8, "assigneeId": "u2", "dueDate": "2026-09-20", "createdAt": "2026-08-22", "completedAt": null },
-  { "id": "t4", "projectId": "p1", "title": "Setup do projeto Expo", "status": "review", "weight": 2, "assigneeId": "u1", "dueDate": "2026-09-05", "createdAt": "2026-08-22", "completedAt": null },
-  { "id": "t5", "projectId": "p1", "title": "Telas com dados mockados", "status": "todo", "weight": 8, "assigneeId": null, "dueDate": "2026-10-15", "createdAt": "2026-08-25", "completedAt": null },
-  { "id": "t6", "projectId": "p1", "title": "Integracao com API REST", "status": "todo", "weight": 8, "assigneeId": null, "dueDate": "2026-11-10", "createdAt": "2026-08-25", "completedAt": null },
-  { "id": "t7", "projectId": "p2", "title": "Levantar estudo de caso", "status": "done", "weight": 3, "assigneeId": "u3", "dueDate": "2026-08-25", "createdAt": "2026-08-11", "completedAt": "2026-08-24" },
-  { "id": "t8", "projectId": "p2", "title": "Montar slides", "status": "doing", "weight": 5, "assigneeId": "u3", "dueDate": "2026-09-22", "createdAt": "2026-08-12", "completedAt": null },
-  { "id": "t9", "projectId": "p2", "title": "Revisar referencias ABNT", "status": "todo", "weight": 2, "assigneeId": "u1", "dueDate": "2026-09-25", "createdAt": "2026-08-12", "completedAt": null },
-  { "id": "t10", "projectId": "p2", "title": "Ensaiar apresentacao", "status": "todo", "weight": 1, "assigneeId": "u4", "dueDate": "2026-09-29", "createdAt": "2026-08-14", "completedAt": null }
+  { "id": "t1", "projectId": "p1", "title": "Documento de escopo", "description": "Problema, público-alvo, personas e proposta de valor.", "status": "done", "weight": 3, "assigneeId": "u1", "dueDate": "2026-09-01", "createdAt": "2026-08-20", "completedAt": "2026-08-29" },
+  { "id": "t2", "projectId": "p1", "title": "Identidade visual e logo", "description": "Símbolo, paleta com contraste verificado e tipografia.", "status": "done", "weight": 5, "assigneeId": "u2", "dueDate": "2026-09-01", "createdAt": "2026-08-20", "completedAt": "2026-08-31" },
+  { "id": "t3", "projectId": "p1", "title": "Telas conceituais no Figma", "status": "done", "weight": 5, "assigneeId": "u2", "dueDate": "2026-09-20", "createdAt": "2026-08-22", "completedAt": "2026-09-18" },
+  { "id": "t4", "projectId": "p1", "title": "Setup do projeto Expo", "status": "done", "weight": 2, "assigneeId": "u1", "dueDate": "2026-09-05", "createdAt": "2026-08-22", "completedAt": "2026-09-04" },
+  { "id": "t5", "projectId": "p1", "title": "Telas com dados mockados", "description": "Home, projetos, Kanban, detalhe da tarefa e perfil.", "status": "review", "weight": 8, "assigneeId": "u1", "dueDate": "2026-10-28", "createdAt": "2026-09-25", "completedAt": null },
+  { "id": "t6", "projectId": "p1", "title": "Integração com Supabase", "description": "Auth, tabelas e políticas de RLS.", "status": "doing", "weight": 5, "assigneeId": "u1", "dueDate": "2026-10-30", "createdAt": "2026-09-25", "completedAt": null },
+  { "id": "t7", "projectId": "p1", "title": "Roteiro de testes e Jest", "status": "doing", "weight": 3, "assigneeId": "u2", "dueDate": "2026-10-29", "createdAt": "2026-09-28", "completedAt": null },
+  { "id": "t8", "projectId": "p1", "title": "Build do APK", "description": "Gerar o APK release e testar em aparelho físico.", "status": "todo", "weight": 3, "assigneeId": null, "dueDate": "2026-10-31", "createdAt": "2026-10-01", "completedAt": null },
+  { "id": "t9", "projectId": "p1", "title": "Manual de uso no README", "status": "todo", "weight": 2, "assigneeId": "u2", "dueDate": "2026-11-03", "createdAt": "2026-10-01", "completedAt": null },
+  { "id": "t10", "projectId": "p1", "title": "Notificações de prazo", "status": "todo", "weight": 5, "assigneeId": null, "dueDate": "2026-11-20", "createdAt": "2026-10-05", "completedAt": null },
+
+  { "id": "t11", "projectId": "p2", "title": "Pesquisa sobre MongoDB", "status": "done", "weight": 5, "assigneeId": "u1", "dueDate": "2026-10-10", "createdAt": "2026-09-12", "completedAt": "2026-10-08" },
+  { "id": "t12", "projectId": "p2", "title": "Estudo de caso: Netflix + Cassandra", "description": "Por que a Netflix escolheu Cassandra e quais trade-offs aceitou.", "status": "doing", "weight": 8, "assigneeId": "u1", "dueDate": "2026-10-29", "createdAt": "2026-09-12", "completedAt": null },
+  { "id": "t13", "projectId": "p2", "title": "Slides da apresentação", "status": "todo", "weight": 5, "assigneeId": null, "dueDate": "2026-11-08", "createdAt": "2026-09-15", "completedAt": null },
+  { "id": "t14", "projectId": "p2", "title": "Comparativo SQL vs NoSQL", "status": "review", "weight": 3, "assigneeId": "u3", "dueDate": "2026-10-26", "createdAt": "2026-09-15", "completedAt": null },
+  { "id": "t15", "projectId": "p2", "title": "Roteiro de fala", "status": "todo", "weight": 2, "assigneeId": "u4", "dueDate": "2026-11-10", "createdAt": "2026-09-20", "completedAt": null },
+  { "id": "t23", "projectId": "p2", "title": "Demonstração prática no MongoDB Atlas", "status": "doing", "weight": 5, "assigneeId": "u3", "dueDate": "2026-11-05", "createdAt": "2026-09-20", "completedAt": null },
+  { "id": "t16", "projectId": "p2", "title": "Ensaio geral", "status": "todo", "weight": 2, "assigneeId": null, "dueDate": "2026-11-11", "createdAt": "2026-09-20", "completedAt": null },
+
+  { "id": "t17", "projectId": "p3", "title": "Termo de abertura", "status": "done", "weight": 3, "assigneeId": "u2", "dueDate": "2026-10-15", "createdAt": "2026-10-01", "completedAt": "2026-10-14" },
+  { "id": "t18", "projectId": "p3", "title": "EAP e cronograma", "status": "doing", "weight": 5, "assigneeId": "u1", "dueDate": "2026-11-04", "createdAt": "2026-10-02", "completedAt": null },
+  { "id": "t19", "projectId": "p3", "title": "Matriz de riscos", "status": "todo", "weight": 3, "assigneeId": "u3", "dueDate": "2026-11-06", "createdAt": "2026-10-02", "completedAt": null },
+  { "id": "t20", "projectId": "p3", "title": "Análise de stakeholders", "status": "doing", "weight": 3, "assigneeId": "u4", "dueDate": "2026-11-02", "createdAt": "2026-10-03", "completedAt": null },
+  { "id": "t21", "projectId": "p3", "title": "Orçamento", "status": "todo", "weight": 2, "assigneeId": "u3", "dueDate": "2026-11-18", "createdAt": "2026-10-03", "completedAt": null },
+  { "id": "t22", "projectId": "p3", "title": "Revisão final", "status": "todo", "weight": 3, "assigneeId": null, "dueDate": "2026-12-01", "createdAt": "2026-10-05", "completedAt": null }
 ]
